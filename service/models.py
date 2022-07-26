@@ -26,6 +26,9 @@ class Task(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.title
+
 
 def task_image_file_path(instance, filename):
     _, extension = os.path.splitext(filename)
