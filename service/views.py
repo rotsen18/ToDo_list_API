@@ -17,6 +17,14 @@ class TaskViewSet(viewsets.ModelViewSet):
     serializer_class = TaskSerializer
     permission_classes = (IsAuthenticated, IsOwnerOrReadOnly | IsSubscriber)
 
+    def get_queryset(self):
+        status = self.request.query_params.get("status")
+
+        if status:
+            return self.queryset.filter(status__icontains=status)
+
+        return self.queryset
+
     def get_serializer_class(self):
         if self.action == "create":
             return TaskCreateSerializer
