@@ -32,3 +32,11 @@ class TaskUpdateSerializer(serializers.ModelSerializer):
         model = Task
         fields = ("title", "status", "description", "subscribers")
         read_only_fields = ("id", "author")
+
+
+class TaskChangeStatusNotOwnerSerializer(serializers.ModelSerializer):
+    status = serializers.ChoiceField(choices=(("Active", "Active"), ))
+
+    class Meta:
+        model = Task
+        fields = ("status", )

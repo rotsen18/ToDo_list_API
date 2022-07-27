@@ -22,7 +22,7 @@ class Task(models.Model):
         on_delete=models.CASCADE,
         related_name="tasks"
     )
-    subscribers = models.ManyToManyField(settings.AUTH_USER_MODEL)
+    subscribers = models.ManyToManyField(settings.AUTH_USER_MODEL, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
