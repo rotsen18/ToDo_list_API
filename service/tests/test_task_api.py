@@ -1,7 +1,3 @@
-import tempfile
-import os
-
-from PIL import Image
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
@@ -9,8 +5,9 @@ from django.urls import reverse
 from rest_framework.test import APIClient
 from rest_framework import status
 
-from service.models import Task, Image
-from service.serializers import TaskCreateSerializer, TaskSerializer
+from service.models import Task
+from service.serializers import TaskSerializer
+
 
 TASK_URL = reverse("service:task-list")
 
@@ -61,9 +58,9 @@ class AuthenticatedTaskApiTests(TestCase):
 
     def test_filter_task_by_status(self):
         author = sample_user()
-        task_1 = sample_task(title="title 1", author=author)
-        task_2 = sample_task(title="title 2", author=author)
-        task_3 = sample_task(title="title 3", author=author, status="Active")
+        sample_task(title="title 1", author=author)
+        sample_task(title="title 2", author=author)
+        sample_task(title="title 3", author=author, status="Active")
         filter_status = "New"
 
         response = self.client.get(TASK_URL, {"status": filter_status})
@@ -139,5 +136,3 @@ class AuthenticatedTaskApiTests(TestCase):
             response = self.client.patch(url, payload)
 
             self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-
