@@ -1,6 +1,12 @@
 from rest_framework import serializers
 
-from service.models import Task
+from service.models import Task, Image
+
+
+class TaskImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = ("image", )
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -14,6 +20,7 @@ class TaskSerializer(serializers.ModelSerializer):
         read_only=True,
         slug_field="username"
     )
+    images = TaskImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Task
@@ -21,6 +28,7 @@ class TaskSerializer(serializers.ModelSerializer):
 
 
 class TaskCreateSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Task
         fields = ("title", "description", "subscribers")
@@ -35,8 +43,8 @@ class TaskUpdateSerializer(serializers.ModelSerializer):
 
 
 class TaskChangeStatusNotOwnerSerializer(serializers.ModelSerializer):
-    status = serializers.ChoiceField(choices=(("Active", "Active"), ))
+    status = serializers.ChoiceField(choices=(("Active", "Active"),))
 
     class Meta:
         model = Task
-        fields = ("status", )
+        fields = ("status",)

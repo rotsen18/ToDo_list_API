@@ -22,7 +22,7 @@ class Task(models.Model):
         on_delete=models.CASCADE,
         related_name="tasks"
     )
-    subscribers = models.ManyToManyField(settings.AUTH_USER_MODEL, null=True)
+    subscribers = models.ManyToManyField(settings.AUTH_USER_MODEL)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -32,7 +32,7 @@ class Task(models.Model):
 
 def task_image_file_path(instance, filename):
     _, extension = os.path.splitext(filename)
-    filename = f"{slugify(instance.author)}-{uuid.uuid4()}{extension}"
+    filename = f"{uuid.uuid4()}{extension}"
 
     return os.path.join("uploads/task_images/", filename)
 
@@ -44,3 +44,7 @@ class Image(models.Model):
         related_name="images"
     )
     image = models.ImageField(upload_to=task_image_file_path)
+
+    def __str__(self):
+        return f"image_{self.id}_{self.task}"
+
