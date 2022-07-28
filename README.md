@@ -1,4 +1,4 @@
-# Cinema API
+# ToDo list API
 
 API service for manage your todo tasks
 
