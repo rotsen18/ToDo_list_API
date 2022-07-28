@@ -2,7 +2,6 @@ import os
 import uuid
 
 from django.db import models
-from django.utils.text import slugify
 
 from todo import settings
 
@@ -47,4 +46,3 @@ class Image(models.Model):
 
     def __str__(self):
         return f"image_{self.id}_{self.task}"
-
