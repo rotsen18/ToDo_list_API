@@ -6,7 +6,7 @@ API service for manage your todo tasks
 
 Python must already be installed on your system
 
-If you want to run locally, postgre must be installed and 
+If you want to run locally, PostgreSQL server must be installed and 
 a database must be created with the appropriate user
 
 ```shell
