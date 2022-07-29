@@ -1,6 +1,6 @@
 # ToDo list API
 
-API service for manage your todo tasks
+API service for manage your todo tasks with email notification
 
 ## Installation and launch
 
@@ -31,6 +31,7 @@ set DEBUG=True
 ## Run with docker
 
 Docker should be installed
+Fill required env variables in `.env` file
 
 ```shell
 docker-compose build
@@ -56,11 +57,21 @@ If you want to create admin user you should add superuser with command:
 python manage.py createsuperuser
 ```
 
+## Configure email
+
+* Get an app key from Google (instructions: https://support.google.com/accounts/answer/185833?hl=en`)
+* In settings.py `EMAIL_HOST_USER = "your@mail.adress"` add your real mail adress
+* Create env variable with your app key
+```shell
+set "EMAIL_HOST_PASSWORD"=<your app key>
+```
+
 ## Features
 
 * Implemented JWT authorisation and permissions
 * You can create todo task with title and description
 * Every task may contain subscribers
+* Email notification for subscriber. Your get mail when somebody has added you to task
 * Task has 3 statuses: New, Active, Closed
 * Editing and deleting task is allowed only by task author
 * For every task you can add photos
