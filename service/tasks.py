@@ -13,7 +13,7 @@ def send_email(receiver_email: str, task: str, subscribed: bool = True):
         if not subscribed:
             action = "unsubscribed from the task:"
 
-        message = f"You have benn {action} {task}"
+        message = f"You have been {action} {task}"
 
         send_mail(
             subject="ToDo list task new action",
